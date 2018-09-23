@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,6 +26,9 @@ public class ElegirArchivo extends javax.swing.JFrame {
      */
     public ElegirArchivo() {
         initComponents();
+        this.setLocationRelativeTo(null); //CENTRAR FORM
+        
+        setIconImage(new ImageIcon(getClass().getResource("/aplicacionia/recursos/game.png")).getImage());//CAMBIA ICONO DE FORM
     }
 
     /**
@@ -121,21 +125,54 @@ public class ElegirArchivo extends javax.swing.JFrame {
             
             if(resultado == JFileChooser.APPROVE_OPTION){
             
-            archivo = selectorArchivos.getSelectedFile();
+                archivo = selectorArchivos.getSelectedFile();
+
+                if(archivo.canRead())
+                {
+                    if(archivo.getName().endsWith("txt"))
+                    {//SI EL ARCHIVO SELECCIONADO ES TXT
+                        this.jTextField1.setText(archivo.getAbsolutePath());
+                        
+                        Scanner scan = new Scanner(archivo);
             
-            // muestra error si es inválido
-            if ((archivo == null) || (archivo.getName().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
-            } // fin de if
+                        while(scan.hasNext()){
+                            this.jTextArea1.insert(scan.nextLine()+"\n", this.jTextArea1.getText().length());
+                        }
+                        //-----------------------------------------------------------------------------------------
+                        
+                        //-----------------------------------------------------------------------------------------
+                        int filas, columnas;
+                        String[] aux, idauxiliar = null, identificadores = null;
+                        
+                        aux = jTextArea1.getText().split("\n");
+                        filas = aux.length;                     //SEPARA POR SALTO DE LINEA PARA CONSEGUIR EL NUM DE FILAS
+                        
+                        idauxiliar = aux[0].split(",");     //SEPARA POR COMA (EN LA PRIMER FILA) PARA OBTENER EL NUM DE COLUMNAS NECESARIAS
+                        columnas = idauxiliar.length;   
+                        
+                        
+                       //VALIDAR SI TODAS LAS COLUMNAS TIENEN LA MISMA CANTIDAD DE COLUMNAS
+                        identificadores = jTextArea1.getText().split(",");
+                        
+                        if (identificadores.length % filas != 0)    //NO FUNCIONA
+                        {
+                            //JOptionPane.showMessageDialog(null,"Mapa Incorrecto");
+                        }
+                        
+                        //JOptionPane.showMessageDialog(null,identificadores);
+                        //JOptionPane.showMessageDialog(null,columnas);
+                        JOptionPane.showMessageDialog(null,identificadores.length);
+                        
+                        
+                        
+                    }
+                    else
+                    {//ERROR SI EL ARCHIVO NO ES TXT
+                        JOptionPane.showMessageDialog(null,"Archivo No Compatible");
+                    }
+                }//FIN DE IF
+            }//FIN DE IF
             
-            this.jTextField1.setText(archivo.getAbsolutePath());
-            }
-            
-            Scanner scan = new Scanner(archivo);
-            
-            while(scan.hasNext()){
-                this.jTextArea1.insert(scan.nextLine()+"\n", this.jTextArea1.getText().length());
-            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ElegirArchivo.class.getName()).log(Level.SEVERE, null, ex);
         }

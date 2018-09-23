@@ -5,6 +5,8 @@
  */
 package aplicacionia;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Dell
@@ -16,6 +18,9 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        this.setLocationRelativeTo(null); //CENTRAR FORM
+        
+        setIconImage(new ImageIcon(getClass().getResource("/aplicacionia/recursos/game.png")).getImage());//CAMBIA ICONO DE FORM
     }
 
     /**
