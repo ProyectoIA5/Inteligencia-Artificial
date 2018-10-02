@@ -42,7 +42,7 @@ public class inicioMapa extends javax.swing.JFrame{
         
     }
     
-    public inicioMapa() {
+    public inicioMapa(int [][]matrizM) {//Aqui le pasaremos la matriz al cargar el archivo
         initComponents();
     }
 }

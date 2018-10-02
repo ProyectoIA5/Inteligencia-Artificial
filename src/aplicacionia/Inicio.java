@@ -86,6 +86,7 @@ public class Inicio extends javax.swing.JFrame {
         ElegirArchivo elegir;
         elegir = new ElegirArchivo();
         elegir.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -25,13 +25,13 @@ public class AplicacionIA {
         // TODO code application logic here
         
         int [][]Tablero;
-        //Inicio inicio;
-        //inicio = new Inicio();
-        //inicio.setVisible(true);
+        Inicio inicio;
+        inicio = new Inicio();
+        inicio.setVisible(true);
         
-        inicioMapa inicioMapa = new inicioMapa();
+        //inicioMapa inicioMapa = new inicioMapa();
         
-        inicioMapa.setVisible(true);
+        //inicioMapa.setVisible(true);
         
     }
     
