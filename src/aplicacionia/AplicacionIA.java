@@ -5,6 +5,8 @@
  */
 package aplicacionia;
 
+import javax.swing.JFrame;
+
 
 
 /**
@@ -16,11 +18,20 @@ public class AplicacionIA {
     /**
      * @param args the command line arguments
      */
+    
+    
+    
     public static void main(String[] args) {
         // TODO code application logic here
-        Inicio inicio;
-        inicio = new Inicio();
-        inicio.setVisible(true);
+        
+        int [][]Tablero;
+        //Inicio inicio;
+        //inicio = new Inicio();
+        //inicio.setVisible(true);
+        
+        inicioMapa inicioMapa = new inicioMapa();
+        
+        inicioMapa.setVisible(true);
         
     }
     

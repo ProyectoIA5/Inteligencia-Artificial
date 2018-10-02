@@ -7,6 +7,7 @@ package aplicacionia;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,6 +115,7 @@ public class ElegirArchivo extends javax.swing.JFrame {
             int resultado;
             JFileChooser selectorArchivos = new JFileChooser();
             File archivo = null;
+            Archivo archivo1;
             
             FileNameExtensionFilter filtroTXT =new FileNameExtensionFilter("TXT","txt");//Instancia para filtrar por TXT
             //Se setea el selector
@@ -126,6 +128,12 @@ public class ElegirArchivo extends javax.swing.JFrame {
             if(resultado == JFileChooser.APPROVE_OPTION){
             
                 archivo = selectorArchivos.getSelectedFile();
+                archivo1= new Archivo(archivo.getName());
+                try {
+                    archivo1.leerArchivo();
+                } catch (IOException ex) {
+                    Logger.getLogger(ElegirArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 if(archivo.canRead())
                 {

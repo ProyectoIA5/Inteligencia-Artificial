@@ -25,9 +25,9 @@ public class Mapa extends javax.swing.JPanel
             for (int j = 0; j < size; j++){
                 casillas[i][j] = new Cuadro(this); 
                 casillas[i][j].setFondo(agua);
-                x = (i * 35)+1;
-                y = (j * 35)+1;
-                casillas[i][j].setBounds(x, y, 34, 34);
+                x = (i * 51)+1;
+                y = (j * 51)+1;
+                casillas[i][j].setBounds(x, y, 50, 50);
                 this.add(casillas[i][j]);
             }
         }
