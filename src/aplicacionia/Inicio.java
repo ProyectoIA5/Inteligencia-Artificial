@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package aplicacionia;
 
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Dell
- */
+
 public class Inicio extends javax.swing.JFrame {
 
     /**
@@ -32,62 +25,60 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jbEmpezar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(619, 340));
+        setMinimumSize(new java.awt.Dimension(619, 340));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(619, 340));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplicacionia/recursos/Image_IA.jpg"))); // NOI18N
-
-        jLabel2.setText("Inteligencia Artificial");
-
-        jButton1.setText("Empezar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbEmpezar.setBackground(new java.awt.Color(255, 0, 51));
+        jbEmpezar.setFont(new java.awt.Font("Dream Orphans", 0, 36)); // NOI18N
+        jbEmpezar.setForeground(new java.awt.Color(255, 255, 255));
+        jbEmpezar.setText("Empezar");
+        jbEmpezar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbEmpezarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbEmpezar);
+        jbEmpezar.setBounds(230, 210, 180, 60);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(86, 86, 86))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1))
-        );
+        jbSalir.setBackground(new java.awt.Color(255, 0, 51));
+        jbSalir.setFont(new java.awt.Font("Dream Orphans", 0, 18)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbSalir);
+        jbSalir.setBounds(260, 280, 120, 31);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplicacionia/recursos/fondo.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 620, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        ElegirArchivo elegir;
-        elegir = new ElegirArchivo();
+    private void jbEmpezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEmpezarActionPerformed
+       
+        ElegirArchivo elegir = new ElegirArchivo();
         elegir.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbEmpezarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        
+        System.exit(0);
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,8 +116,8 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jbEmpezar;
+    private javax.swing.JButton jbSalir;
     // End of variables declaration//GEN-END:variables
 }

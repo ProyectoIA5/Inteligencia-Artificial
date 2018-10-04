@@ -7,46 +7,84 @@ import javax.swing.*;
 
 public class Mapa extends javax.swing.JPanel
 {
-    private ImageIcon agua, pared;
-    private boolean tipoTablero;
-    private Cuadro [][] casillas ;
+    private ImageIcon agua, pared, nieve, lava, mountain, negro, gris;
+    //private int idTerreno = -1;
+    private Cuadro [][] cuadro;
         
     public Mapa() {
         initComponents();
     }
-    public Mapa(int size, boolean tipo) {
+    
+    public Mapa(int sizeX, int sizeY, int idTerreno) {
         initComponents();
-        int x,y;
-        setLayout(new java.awt.GridLayout(size, size));
-        this.tipoTablero = tipo;
+        int x, y, aux = 0;
+        //setLayout(new java.awt.GridLayout(sizeX+1, sizeY+1));
         cargarImagenes();
-        casillas = new Cuadro[size][size];
-        for (int i = 0; i < size; i++){
-            for (int j = 0; j < size; j++){
-                casillas[i][j] = new Cuadro(this); 
-                casillas[i][j].setFondo(agua);
-                x = (i * 51)+1;
-                y = (j * 51)+1;
-                casillas[i][j].setBounds(x, y, 50, 50);
-                this.add(casillas[i][j]);
+        cuadro = new Cuadro[sizeX+1][sizeY+1];
+        
+        if(sizeY == 15){
+            aux = 61;
+        }else if(sizeY == 14){
+            aux = 65;   //65 PARA Y CON 14
+        }else if(sizeY == 13){
+            aux = 70;   //70 PARA Y CON 13
+        }else if(sizeY == 12){
+            aux = 76;   //76 PARA Y CON 12
+        }else{
+            aux = 83;  //83 PARA EL RESTO DE TAMAÑOS
+        }
+                
+        for (int i = 0; i <= sizeX; i++)
+        {
+            for (int j = 0; j <= sizeY; j++)
+            {
+                cuadro[i][j] = new Cuadro(this);
+                
+                if(i == 0 && j != 0)
+                {
+                    x = (i * 41) + 1;
+                    y = (j * aux) + 1;
+                    cuadro[i][j].setFondo(gris);
+                    cuadro[i][j].setBounds(x+(aux/2), y, (aux-1)/2, aux-1);
+                    this.add(cuadro[i][j]);
+                    
+                }else if(j == 0 && i != 0)
+                {
+                    x = (i * aux) + 1;
+                    y = (j * 41) + 1;
+                    cuadro[i][j].setFondo(gris);
+                    cuadro[i][j].setBounds(x, y+(aux/2), aux-1, (aux-1)/2);
+                    this.add(cuadro[i][j]);
+                }else if(i == 0 && j == 0){
+                    
+                }
+                else{
+                    x = (i * aux) + 1;
+                    y = (j * aux) + 1;
+                    cuadro[i][j].setFondo(negro);
+                    cuadro[i][j].setBounds(x, y, aux-1, aux-1);
+                    this.add(cuadro[i][j]);                    
+                }
+               
             }
         }
     }
     
-    public boolean getTipoTablero(){
-        return this.isTipoTablero();
-    }
     
     public void pintar(int x, int y){
-        this.casillas[x][y].setFondo(pared);
+        this.cuadro[x][y].setFondo(pared);
         this.repaint();
     }
     
     private void cargarImagenes() {
-        this.agua = this.cargarFondo("agua.gif");
-        this.pared = this.cargarFondo("pared.gif");
+        this.agua = this.cargarFondo("/aplicacionia/recursos/agua.jpg");
+        this.pared = this.cargarFondo("/aplicacionia/recursos/pared.jpg");
+        this.nieve = this.cargarFondo("/aplicacionia/recursos/nieve.jpg");
+        this.lava = this.cargarFondo("/aplicacionia/recursos/lava.png");
+        this.mountain = this.cargarFondo("/aplicacionia/recursos/montaña.jpg");
+        this.negro = this.cargarFondo("/aplicacionia/recursos/negro.jpg");
+        this.gris = this.cargarFondo("/aplicacionia/recursos/gris.jpg");
         
-        //  AQUI TENDRIAMOS QUE INCLUIR TODAS LAS DEMAS IMAGENES QUE SE USARAN
     }
     
     protected static ImageIcon cargarFondo(String ruta) {
@@ -59,11 +97,11 @@ public class Mapa extends javax.swing.JPanel
         }
     }
     
-    public int[] getCoordenadas(Cuadro casilla) {
+    public int[] getCoordenadas(Cuadro cuadro) {
         int [] coordenadas = new int[2];
-        for (int i=0; i < this.casillas.length; i++) {
-            for (int j=0; j < this.casillas.length; j++) {
-                if (this.casillas[i][j] == casilla) {
+        for (int i=0; i < this.cuadro.length; i++) {
+            for (int j=0; j < this.cuadro.length; j++) {
+                if (this.cuadro[i][j] == cuadro) {
                     coordenadas[0] = i;
                     coordenadas[1] = j;
                 }
@@ -72,26 +110,19 @@ public class Mapa extends javax.swing.JPanel
         return coordenadas;
     }
     
-    public Cuadro[][] getCasillas() {
-        return casillas;
+    public Cuadro[][] getCuadro() {
+        return cuadro;
     }
     
-    public void setCasillas(Cuadro[][] casillas) {
-        this.casillas = casillas;
-    }
-    
-    public boolean isTipoTablero() {
-        return tipoTablero;
-    }    
-    public void setTipoTablero(boolean tipoTablero) {
-        this.tipoTablero = tipoTablero;
+    public void setCuadro(Cuadro[][] cuadro) {
+        this.cuadro = cuadro;
     }
                               
     private void initComponents() {
         setLayout(null);
-        setBackground(new java.awt.Color(0, 0, 0));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setPreferredSize(new java.awt.Dimension(351, 351));
+        //setBackground(new java.awt.Color(255 , 255, 255));
+        //setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setPreferredSize(new java.awt.Dimension(970, 970)); //DIMENSION DEL MAPA
     }                      
                      
 }

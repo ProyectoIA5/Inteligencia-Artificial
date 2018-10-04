@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package aplicacionia;
 
 import java.io.File;
@@ -16,10 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author Dell
- */
+
 public class ElegirArchivo extends javax.swing.JFrame {
 
     /**
@@ -110,7 +103,6 @@ public class ElegirArchivo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
             //Crea instancia de clase JFileChooser
             int resultado;
             JFileChooser selectorArchivos = new JFileChooser();

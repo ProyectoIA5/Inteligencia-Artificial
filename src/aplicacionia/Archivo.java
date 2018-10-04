@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package aplicacionia;
 
 import java.io.*;
@@ -10,10 +6,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**  
- *
- * @author Dell
- */
+
 public class Archivo {
     
     private String ruta_archivo;

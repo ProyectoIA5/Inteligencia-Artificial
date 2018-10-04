@@ -1,48 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package aplicacionia;
 
-/**
- *
- * @author Dell
- */
-public class inicioMapa extends javax.swing.JFrame{
-    private void initComponents(){
-        Mapa mapa= new Mapa(15,true);
+import javax.swing.ImageIcon;
+
+public class inicioMapa extends javax.swing.JFrame
+{
+    private void initComponents()
+    {
+        Mapa mapa= new Mapa(4,4,0);
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         javax.swing.GroupLayout mapaLayout = new javax.swing.GroupLayout(mapa);
         mapa.setLayout(mapaLayout);
         mapaLayout.setHorizontalGroup(
             mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         mapaLayout.setVerticalGroup(
             mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                //.addContainerGap(45,50)
                 .addComponent(mapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(400, Short.MAX_VALUE)) //TAMAÑO HORIZONTAL
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                //.addContainerGap(45,50)
                 .addComponent(mapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))  //TAMAÑO VERTICAL
         );
         pack();
         
     }
     
-    public inicioMapa(int [][]matrizM) {//Aqui le pasaremos la matriz al cargar el archivo
+    public inicioMapa() {
         initComponents();
+        this.setLocationRelativeTo(null); //CENTRAR FORM
+        setIconImage(new ImageIcon(getClass().getResource("/aplicacionia/recursos/game.png")).getImage());//CAMBIA ICONO DE FORM
     }
 }

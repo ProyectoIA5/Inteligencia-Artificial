@@ -7,9 +7,9 @@ import javax.swing.*;
 public class Cuadro extends javax.swing.JPanel implements MouseListener
 {
     
-    private Mapa tablero;
+    private Mapa mapa;
     private ImageIcon fondo;
-    private static int [] casillaMarcada = new int[2];
+    private int identificador;
     
     public Cuadro()
     {        
@@ -19,10 +19,7 @@ public class Cuadro extends javax.swing.JPanel implements MouseListener
     public Cuadro (Mapa t)
     {
         initComponents();        
-        this.tablero = t;
-        if(this.tablero.getTipoTablero() == true){// tablero responde a clics?
-            this.addMouseListener(this);
-        }
+        this.mapa = t;
     }
     
     public void setFondo(ImageIcon fondo){
@@ -33,18 +30,26 @@ public class Cuadro extends javax.swing.JPanel implements MouseListener
         return this.fondo;
     }
     
-                          
+    public void setIDTerreno(int idTerreno)
+    {
+        this.identificador = idTerreno;
+    }
+    public int getIDTerreno()
+    {
+        return this.identificador;
+    }
+          
     private void initComponents() {
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        /*javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
+            .addGap(0, 10000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 193, Short.MAX_VALUE)
-        );
+            .addGap(0, 300, Short.MAX_VALUE)
+        );*/
     }                       
     
     public void paintComponent(Graphics g){
@@ -53,20 +58,26 @@ public class Cuadro extends javax.swing.JPanel implements MouseListener
     }
     
     public void mouseClicked(MouseEvent e){}
-    public void mouseEntered(MouseEvent e){}
-    public void mouseExited(MouseEvent e){}
-    public void mousePressed(MouseEvent e){
-            this.setCasillaMarcada(tablero.getCoordenadas((Cuadro)e.getComponent())); 
-            this.tablero.pintar(this.getCasillaMarcada()[0],this.getCasillaMarcada()[1]);
+    public void mouseEntered(MouseEvent e){
+        //PARECE SER QUE ESTE FUNCIONARÁ PARA MOSTRAR COORDENADA DE CADA CUADRO
+        //getToolTipText(MouseEvent)
+        //this.tablero.;
+        //this.setCasillaMarcada(tablero.getCoordenadas((Cuadro)e.getComponent())); 
+        //this.tablero.pintar(this.getCasillaMarcada()[0],this.getCasillaMarcada()[1]);
+        
+    
     }
+    public void mouseExited(MouseEvent e){}
+    public void mousePressed(MouseEvent e){}
     public void mouseReleased(MouseEvent e){}
     
-    public static int[] getCasillaMarcada() {
-        return casillaMarcada;
+    public void SetToolTipText(String s)
+    {
+        
     }
-    public static void setCasillaMarcada(int[] aCasillaMarcada) {
-        casillaMarcada = aCasillaMarcada;
-    }                  
+    
+    
+
+    
     
 }
-
