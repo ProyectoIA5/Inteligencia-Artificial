@@ -1,9 +1,13 @@
 
 package aplicacionia;
 
+import com.sun.xml.internal.ws.message.StringHeader;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +19,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ElegirArchivo extends javax.swing.JFrame {
 
+    private final int MAXIMO_FILA_COLUMNA = 15;
+    private final String SEPARATOR = ",";
+    private String noCompatible = "EL ARCHIVO SELECCIONADO NO ES UN ARCHIVO DE TEXTO";
+    private String noColumnas = "EL ARCHIVO SELECCIONADO NO TIENE LA MISMA CANTIDAD DE COLUMNAS EN TODAS LAS FILAS";
+    private String noMaximo = "LA MATRIZ SELECCIONADA SOBREPASÓ EL LÍMITE DE FILAS";
+    private int[][] matrizMapa = new int[15][15];
+    String[] columAux;
+    String linea;
+    int columna = 0, fila = 0;
+    private int[] identificadores;
     /**
      * Creates new form ElegirArchivo
      */
@@ -34,150 +48,263 @@ public class ElegirArchivo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jlRuta = new javax.swing.JLabel();
+        jtfRuta = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtaArchivo = new javax.swing.JTextArea();
+        jbAbrir = new javax.swing.JButton();
+        BtnAceptar = new javax.swing.JButton();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(559, 280));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel1.setText("Ruta:");
+        jlRuta.setFont(new java.awt.Font("Dream Orphans", 0, 26)); // NOI18N
+        jlRuta.setText("Ruta:");
+        getContentPane().add(jlRuta);
+        jlRuta.setBounds(10, 10, 80, 50);
 
-        jButton1.setText("Abrir...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jtfRuta.setFont(new java.awt.Font("Dream Orphans", 0, 18)); // NOI18N
+        jtfRuta.setBorder(null);
+        getContentPane().add(jtfRuta);
+        jtfRuta.setBounds(90, 10, 330, 40);
+
+        jtaArchivo.setEditable(false);
+        jtaArchivo.setColumns(20);
+        jtaArchivo.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        jtaArchivo.setForeground(new java.awt.Color(255, 0, 0));
+        jtaArchivo.setLineWrap(true);
+        jtaArchivo.setRows(5);
+        jtaArchivo.setWrapStyleWord(true);
+        jtaArchivo.setBorder(null);
+        jtaArchivo.setDisabledTextColor(new java.awt.Color(255, 0, 0));
+        jtaArchivo.setSelectionColor(new java.awt.Color(255, 0, 0));
+        jScrollPane1.setViewportView(jtaArchivo);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 60, 540, 140);
+
+        jbAbrir.setBackground(new java.awt.Color(255, 0, 0));
+        jbAbrir.setFont(new java.awt.Font("Dream Orphans", 0, 24)); // NOI18N
+        jbAbrir.setForeground(new java.awt.Color(255, 255, 255));
+        jbAbrir.setText("Abrir");
+        jbAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbAbrirActionPerformed(evt);
             }
         });
+        getContentPane().add(jbAbrir);
+        jbAbrir.setBounds(440, 10, 110, 40);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        BtnAceptar.setText("Aceptar");
+        BtnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAceptarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BtnAceptar);
+        BtnAceptar.setBounds(240, 230, 87, 29);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplicacionia/recursos/fondo.jpg"))); // NOI18N
+        getContentPane().add(Fondo);
+        Fondo.setBounds(0, 0, 560, 280);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            //Crea instancia de clase JFileChooser
-            int resultado;
-            JFileChooser selectorArchivos = new JFileChooser();
-            File archivo = null;
-            Archivo archivo1;
-            
-            FileNameExtensionFilter filtroTXT =new FileNameExtensionFilter("TXT","txt");//Instancia para filtrar por TXT
-            //Se setea el selector
-            selectorArchivos.setFileFilter(filtroTXT);
-            //muestra el cuadro de dialogo para elegir el archivo
-            //selectorArchivos.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            //Indica cual fue la accion del usuario sobre el JFileChooser
-            resultado = selectorArchivos.showOpenDialog(null);
-            
-            if(resultado == JFileChooser.APPROVE_OPTION){
-            
-                archivo = selectorArchivos.getSelectedFile();
-                archivo1= new Archivo(archivo.getName());
-                try {
-                    archivo1.leerArchivo();
-                } catch (IOException ex) {
-                    Logger.getLogger(ElegirArchivo.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                if(archivo.canRead())
-                {
-                    if(archivo.getName().endsWith("txt"))
-                    {//SI EL ARCHIVO SELECCIONADO ES TXT
-                        this.jTextField1.setText(archivo.getAbsolutePath());
-                        
-                        Scanner scan = new Scanner(archivo);
-            
-                        while(scan.hasNext()){
-                            this.jTextArea1.insert(scan.nextLine()+"\n", this.jTextArea1.getText().length());
-                        }
-                        //-----------------------------------------------------------------------------------------
-                        
-                        //-----------------------------------------------------------------------------------------
-                        int filas, columnas;
-                        String[] aux, idauxiliar = null, identificadores = null;
-                        
-                        aux = jTextArea1.getText().split("\n");
-                        filas = aux.length;                     //SEPARA POR SALTO DE LINEA PARA CONSEGUIR EL NUM DE FILAS
-                        
-                        idauxiliar = aux[0].split(",");     //SEPARA POR COMA (EN LA PRIMER FILA) PARA OBTENER EL NUM DE COLUMNAS NECESARIAS
-                        columnas = idauxiliar.length;   
-                        
-                        
-                       //VALIDAR SI TODAS LAS COLUMNAS TIENEN LA MISMA CANTIDAD DE COLUMNAS
-                        identificadores = jTextArea1.getText().split(",");
-                        
-                        if (identificadores.length % filas != 0)    //NO FUNCIONA
-                        {
-                            //JOptionPane.showMessageDialog(null,"Mapa Incorrecto");
-                        }
-                        
-                        //JOptionPane.showMessageDialog(null,identificadores);
-                        //JOptionPane.showMessageDialog(null,columnas);
-                        JOptionPane.showMessageDialog(null,identificadores.length);
-                        
-                        
-                        
-                    }
-                    else
-                    {//ERROR SI EL ARCHIVO NO ES TXT
-                        JOptionPane.showMessageDialog(null,"Archivo No Compatible");
-                    }
-                }//FIN DE IF
-            }//FIN DE IF
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ElegirArchivo.class.getName()).log(Level.SEVERE, null, ex);
+    private void jbAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirActionPerformed
+        
+        String[][] matrizCadena;
+        int[][] matrizIDs;
+        String[] aux;
+        
+        matrizCadena = leerArchivo();
+        System.out.println(matrizCadena[0][4]);
+        aux = numColumnas(matrizCadena);
+        
+        if(numFilas(matrizCadena)>MAXIMO_FILA_COLUMNA) {
+            JOptionPane.showMessageDialog(null, "Sobrepaso el limite de filas en el archivo"+matrizCadena.length);
+            this.dispose();
+        }else if (aux.length>MAXIMO_FILA_COLUMNA) {
+            JOptionPane.showMessageDialog(null, "Sobrepaso el limite elementos en fila en el archivo");
+            this.dispose();
+        } else if(validarFilas(matrizCadena)){
+            JOptionPane.showMessageDialog(null, "Hay filas con diferente numero de elementos");
+            this.dispose();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        //matrizIDs = 
+                MatrizStringtoInt(matrizCadena);
+        
+        //idTerrenos(matrizIDs);
+    }//GEN-LAST:event_jbAbrirActionPerformed
 
+    private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
+        // TODO add your handling code here:
+        //imprimirTerrenos();
+        TipoTerreno tp = new TipoTerreno(this.identificadores);
+        tp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnAceptarActionPerformed
+
+    public void idTerrenos(int[][] matrizInt){//Separa todos los elemntos que son diferentes y los retorna en un arreglo de int
+        
+        //int[] identificadores;
+        //int[] identificadores = null;
+        System.out.println(matrizInt[0][0]);
+        int contador;
+        int ejemplo=matrizInt[0][0];
+        //this.identificadores[0]=matrizInt[0][0];
+        
+        for(int i=0;i<15;i++){
+            for(int j=1;j<15;j++){
+                contador=0;
+                while(contador<this.identificadores.length){
+                    if(matrizInt[i][j]!=identificadores[contador]){
+                        this.identificadores[this.identificadores.length+1]=matrizInt[i][j];
+                    }
+                    contador++;
+                }
+                    
+            }
+        }
+        
+        //return identificadores;
+    }  
+    /*
+    public int [][] MatrizStringtoInt(String[][] matrizString)//Convierte los elemento de la matriz de String a matriz de Enteros
+    {
+        int [][] matrizInt = null;
+        for(int i = 0; i < fila; i++)
+        {
+            for(int j = 0; j < columna; j++)
+            {
+                System.out.println(matrizString[i][j]);
+                matrizInt[i][j] = Integer.parseInt(matrizString[i][j]);
+                System.out.println(matrizInt[i][j]);
+            }
+        }
+        return matrizInt;
+    }*/
+    public void MatrizStringtoInt(String[][] matrizString)//Convierte los elemento de la matriz de String a matriz de Enteros
+    {
+        int [][] matrizInt = null;
+        for(int i = 0; i < fila; i++)
+        {
+            for(int j = 0; j < columna; j++)
+            {
+                System.out.println(matrizString[i][j]);
+                matrizInt[i][j] = Integer.parseInt(matrizString[i][j]);
+                System.out.println(matrizInt[i][j]);
+            }
+        }
+        //return matrizInt;
+    }
+    
+    public int numFilas(String[][] filas){//Valida que el numero de filas no exceda el maximo de 15 y retorna el numero de filas
+        
+        if(filas.length>this.MAXIMO_FILA_COLUMNA){
+            System.out.println("Numero de filas excede el maximo"+filas.length);
+        }
+        return filas.length;
+    }
+    public String[] numColumnas(String[][] columnas){//Valida que las filas de la matrz no excedan el limite de 15 elementos y retorna la fila que excede el limite
+        //int i=0;
+        String[] fila;
+        fila=columnas[0];
+        for(int i=0;i<columnas.length;i++){
+            
+            System.out.println("Numero de columnas " + columnas[i].length);
+            if(columnas[i].length>this.MAXIMO_FILA_COLUMNA){
+                
+                System.out.println("Numero de elementos excede el maximo");
+                fila=columnas[i];
+                break;
+            }
+        }
+        return fila;
+    }
+    public boolean validarFilas(String[][] matrix){//Valida que todas filas tengan el mismo numero de elementos
+        int numeroElementosFila = matrix[0].length;
+        boolean validador=true;
+        
+        System.out.println(matrix.length+ " numero de filas");
+        System.out.println(matrix[0].length+" numero de elemetos fila 0");
+        
+        for(int i=1;i<matrix.length;i++){
+            if(matrix[i].length!=numeroElementosFila){
+                validador=false;
+            } else {
+            }
+        }
+        return validador;
+    }
+    
+    public void imprimirTerrenos(){
+        for(int i=0;i<this.identificadores.length;i++){
+            System.out.println(this.identificadores[i]);
+        }
+    }
+    
+    @SuppressWarnings("null")
+    public String[][] leerArchivo() {
+        String[][] matrizCadenas = new String[15][15];
+        //String[] fields = null;
+        
+        // muestra el cuadro de diálogo de archivos, para que el usuario pueda elegir el archivo a abrir
+        JFileChooser selectorArchivos1 = new JFileChooser();
+        selectorArchivos1.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos TXT", "txt");
+        selectorArchivos1.setFileFilter(filtro);
+        
+        // indica cual fue la accion de usuario sobre el jfilechooser
+        int resultado = selectorArchivos1.showOpenDialog(this);
+        
+        File archivo = selectorArchivos1.getSelectedFile(); // obtiene el archivo seleccionado
+        
+        // muestra error si es inválido
+        if ((archivo == null) || (archivo.getName().equals(""))) {
+        JOptionPane.showMessageDialog(this, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
+        this.dispose();
+        } // fin de if
+        String ruta;
+            ruta = archivo.getAbsolutePath();
+        System.out.println(ruta);
+        try {
+        int i=0;
+        BufferedReader br =new BufferedReader(new FileReader(ruta));
+        String line;
+        
+         do{
+            line = br.readLine();
+            //line = quitarSaltos(line);
+            if (line != null){
+            String fields[] = line.split(SEPARATOR);
+            
+                matrizCadenas[i] = fields;  //SOLUCIONAR ESTE ERROR
+            System.out.println("Tamanio: "+matrizCadenas[i].length);
+            System.out.println(Arrays.toString(matrizCadenas[i]));}
+            
+            
+            
+            i++;
+         }while (line!=null);
+         } catch (IOException e) {
+             e.printStackTrace();
+        } /*finally{
+            if (br!=null) {
+            br.close();
+         }
+        }*/
+        return matrizCadenas;
+    }
+    public String quitarSaltos(String cadena){
+        return cadena.replaceAll("\n", "");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -214,11 +341,12 @@ public class ElegirArchivo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton BtnAceptar;
+    private javax.swing.JLabel Fondo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbAbrir;
+    private javax.swing.JLabel jlRuta;
+    private javax.swing.JTextArea jtaArchivo;
+    private javax.swing.JTextField jtfRuta;
     // End of variables declaration//GEN-END:variables
 }
