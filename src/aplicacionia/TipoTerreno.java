@@ -2,6 +2,8 @@ package aplicacionia;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 
@@ -11,7 +13,7 @@ public class TipoTerreno extends javax.swing.JFrame {
      * Creates new form TipoTerreno
      */
     
-    public TipoTerreno() {
+    public TipoTerreno(int [][]matrizMapa) {
         initComponents();
         this.setLocationRelativeTo(null); //CENTRAR FORM
         
@@ -19,7 +21,42 @@ public class TipoTerreno extends javax.swing.JFrame {
         
         jtTerrenos.getTableHeader().setFont(new Font("Dream Orphans", 1, 24));
         jtTerrenos.getTableHeader().setForeground(Color.red);
+        
+        this.matrizMapa=matrizMapa;
     }
+
+    private TipoTerreno() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    public List<Integer> idTerrenos(){
+        
+        //int[] identificadores;
+        List<Integer> ids = new ArrayList<>();
+        int contador=0;
+        boolean sacar=true;
+        ids.add(this.matrizMapa[0][0]);
+        
+        int[][] matrizInt =this.matrizMapa;
+        
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                contador = 0;
+                System.out.println("Posicion a evaluar: "+i+" "+j );
+                sacar=true;
+                
+                if(ids.contains(matrizInt[i][j])) {
+                } else {
+                    ids.add(matrizInt[i][j]);
+                }
+            }
+        }
+        System.out.println("Identificadores");
+        System.out.println(ids);
+        
+        return ids;
+    }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,7 +166,12 @@ public class TipoTerreno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAceptaSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptaSelecActionPerformed
+        List<Integer> aux;
         
+        aux = idTerrenos();
+        //Object[][] = aux
+                
+        //this.jtTerrenos.set
         
     }//GEN-LAST:event_buttonAceptaSelecActionPerformed
 
@@ -171,7 +213,7 @@ public class TipoTerreno extends javax.swing.JFrame {
             }
         });
     }
-
+    private int[][] matrizMapa;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAceptaSelec;
     private javax.swing.JButton buttonAceptaSelec1;
