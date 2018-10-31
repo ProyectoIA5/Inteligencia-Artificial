@@ -1,4 +1,3 @@
-
 package aplicacionia;
 
 import java.awt.*;
@@ -9,18 +8,27 @@ public class Mapa extends javax.swing.JPanel
 {
     private ImageIcon agua, pared, nieve, lava, mountain, negro, gris;
     //private int idTerreno = -1;
+    private int[][] MatrizMapaID = new int[15][15];
+    private int fila, columna;
     private Cuadro [][] cuadro;
         
-    public Mapa() {
+    public Mapa()
+    {
         initComponents();
+        InicializarMatriz();
+        JOptionPane.showMessageDialog(null, MatrizMapaID);
     }
     
-    public Mapa(int sizeX, int sizeY, int idTerreno) {
+    public Mapa(int sizeX, int sizeY, int[][] MatrisIDs)
+    {
         initComponents();
         int x, y, aux = 0;
         //setLayout(new java.awt.GridLayout(sizeX+1, sizeY+1));
         cargarImagenes();
         cuadro = new Cuadro[sizeX+1][sizeY+1];
+        char columna = 'A';
+        int fila = 1;
+        Font fuente = new Font("Dream Orphans", 0, 20);
         
         if(sizeY == 15){
             aux = 61;
@@ -40,25 +48,43 @@ public class Mapa extends javax.swing.JPanel
             {
                 cuadro[i][j] = new Cuadro(this);
                 
-                if(i == 0 && j != 0)
+                if(i == 0 && j != 0)        //IMPRIME LAS COORDENADAS
                 {
                     x = (i * 41) + 1;
                     y = (j * aux) + 1;
                     cuadro[i][j].setFondo(gris);
+                    
+                    JTextArea coordn = new JTextArea();
+                    coordn.setText(Integer.toString(fila));
+                    coordn.setOpaque(false);
+                    coordn.setEditable(false);
+                    coordn.setFont(fuente);
+                    cuadro[i][j].add(coordn);
+                    fila++;
+                    
                     cuadro[i][j].setBounds(x+(aux/2), y, (aux-1)/2, aux-1);
                     this.add(cuadro[i][j]);
                     
-                }else if(j == 0 && i != 0)
+                }else if(j == 0 && i != 0)        //IMPRIME LAS COORDENADAS
                 {
                     x = (i * aux) + 1;
                     y = (j * 41) + 1;
                     cuadro[i][j].setFondo(gris);
+                    
+                    JTextArea coordn = new JTextArea();
+                    coordn.setText(Character.toString(columna));
+                    coordn.setOpaque(false);
+                    coordn.setEditable(false);
+                    coordn.setFont(fuente);
+                    cuadro[i][j].add(coordn);
+                    columna++;
+                    
                     cuadro[i][j].setBounds(x, y+(aux/2), aux-1, (aux-1)/2);
                     this.add(cuadro[i][j]);
                 }else if(i == 0 && j == 0){
-                    
+                                                //NO IMPRIME NADA
                 }
-                else{
+                else{                       //IMPRIME LOS CUADROS
                     x = (i * aux) + 1;
                     y = (j * aux) + 1;
                     cuadro[i][j].setFondo(negro);
@@ -69,14 +95,15 @@ public class Mapa extends javax.swing.JPanel
             }
         }
     }
-    
-    
-    public void pintar(int x, int y){
-        this.cuadro[x][y].setFondo(pared);
+
+    public void pintar(int x, int y, ImageIcon fondo)
+    {
+        this.cuadro[x][y].setFondo(fondo);
         this.repaint();
     }
     
-    private void cargarImagenes() {
+    private void cargarImagenes()
+    {
         this.agua = this.cargarFondo("/aplicacionia/recursos/agua.jpg");
         this.pared = this.cargarFondo("/aplicacionia/recursos/pared.jpg");
         this.nieve = this.cargarFondo("/aplicacionia/recursos/nieve.jpg");
@@ -87,7 +114,8 @@ public class Mapa extends javax.swing.JPanel
         
     }
     
-    protected static ImageIcon cargarFondo(String ruta) {
+    protected static ImageIcon cargarFondo(String ruta)
+    {
         java.net.URL localizacion = Mapa.class.getResource(ruta);
         if (localizacion != null) {
             return new ImageIcon(localizacion);
@@ -97,7 +125,8 @@ public class Mapa extends javax.swing.JPanel
         }
     }
     
-    public int[] getCoordenadas(Cuadro cuadro) {
+    public int[] getCoordenadas(Cuadro cuadro)
+    {
         int [] coordenadas = new int[2];
         for (int i=0; i < this.cuadro.length; i++) {
             for (int j=0; j < this.cuadro.length; j++) {
@@ -110,19 +139,35 @@ public class Mapa extends javax.swing.JPanel
         return coordenadas;
     }
     
-    public Cuadro[][] getCuadro() {
+    public Cuadro[][] getCuadro()
+    {
         return cuadro;
     }
     
-    public void setCuadro(Cuadro[][] cuadro) {
+    public void setCuadro(Cuadro[][] cuadro)
+    {
         this.cuadro = cuadro;
     }
                               
-    private void initComponents() {
+    private void initComponents()
+    {
         setLayout(null);
         //setBackground(new java.awt.Color(255 , 255, 255));
         //setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setPreferredSize(new java.awt.Dimension(970, 970)); //DIMENSION DEL MAPA
-    }                      
+        setPreferredSize(new java.awt.Dimension(970, 970));     //DIMENSION DEL MAPA
+    }    
+    
+    public void InicializarMatriz()
+    {
+        for(int i = 0; i < fila; i++)
+        {
+            for(int j = 0; j < columna; j++)
+            {
+                MatrizMapaID[i][j] = -1;
+            }
+        }
+    }
+    
+    
                      
 }

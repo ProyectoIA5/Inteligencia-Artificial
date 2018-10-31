@@ -1,10 +1,10 @@
-
 package aplicacionia;
 
 import java.io.*;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class Archivo {
@@ -48,7 +48,8 @@ public class Archivo {
             
             String linea;
             
-            while(buffer.readLine()!=null){
+            while(buffer.readLine()!=null)
+            {
                 linea = buffer.readLine();
                 String [] arrAux = linea.split(SEPARADOR);
                 System.out.println(Arrays.toString(arrAux));

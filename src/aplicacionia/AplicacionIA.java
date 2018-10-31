@@ -1,10 +1,10 @@
-
 package aplicacionia;
 
 import javax.swing.JFrame;
 
 
-public class AplicacionIA {
+public class AplicacionIA
+{
 
     /**
      * @param args the command line arguments
@@ -12,9 +12,11 @@ public class AplicacionIA {
     
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         
         int [][]Tablero;
+        
         Inicio inicio = new Inicio();
         inicio.setVisible(true);
         
@@ -25,5 +27,4 @@ public class AplicacionIA {
         //tipoTerreno.setVisible(true);
         
     }
-    
 }

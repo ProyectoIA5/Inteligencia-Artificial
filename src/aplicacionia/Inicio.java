@@ -1,4 +1,3 @@
-
 package aplicacionia;
 
 import javax.swing.ImageIcon;
@@ -62,6 +61,7 @@ public class Inicio extends javax.swing.JFrame {
         jbSalir.setBounds(260, 280, 120, 31);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplicacionia/recursos/fondo.jpg"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 620, 340);
 
