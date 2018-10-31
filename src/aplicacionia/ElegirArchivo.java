@@ -139,25 +139,18 @@ public class ElegirArchivo extends javax.swing.JFrame {
             int resultado;
             JFileChooser selectorArchivos = new JFileChooser();     //Crea instancia de clase JFileChooser
             File archivo = null;
-            Archivo archivo1;
-            int columnaBien = 0;
             String[][] matrizAux = new String[15][15];
-            
             
             FileNameExtensionFilter filtroTXT =new FileNameExtensionFilter("Archivo de Texto","txt");   //Instancia para filtrar por TXT
             
             selectorArchivos.setFileFilter(filtroTXT);      //Se setea el selector
-            
-            //muestra el cuadro de dialogo para elegir el archivo
-            //selectorArchivos.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            
+                        
             resultado = selectorArchivos.showOpenDialog(null);      //Indica cual fue la accion del usuario sobre el JFileChooser
             
             if(resultado == JFileChooser.APPROVE_OPTION)
             {
             
                 archivo = selectorArchivos.getSelectedFile();
-                archivo1= new Archivo(archivo.getName());
 
                 if(archivo.canRead())     //SI EL ARCHIVO SE PUEDE LEER
                 {
@@ -210,6 +203,7 @@ public class ElegirArchivo extends javax.swing.JFrame {
                             iniciar.setVisible(true);
                             this.setVisible(false);     //CERRAR ESTE FRAME
                        }
+                       correcto = true;
                           
                     }
                     else   //ERROR SI EL ARCHIVO NO ES TXT  
