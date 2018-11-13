@@ -154,7 +154,7 @@ public class Mapa extends javax.swing.JPanel
         setLayout(null);
         //setBackground(new java.awt.Color(255 , 255, 255));
         //setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setPreferredSize(new java.awt.Dimension(970, 970));     //DIMENSION DEL MAPA
+        setPreferredSize(new java.awt.Dimension(990, 970));     //DIMENSION DEL MAPA
     }    
     
     public void InicializarMatriz()
